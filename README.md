@@ -1,0 +1,2 @@
+# wizwalkerbots
+Bots for wiz 
