@@ -1,0 +1,2 @@
+{1} mass
+tri[sharp] @ ally(0) | tri @ ally(0)

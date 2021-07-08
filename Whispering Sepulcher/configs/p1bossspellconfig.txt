@@ -1,0 +1,3 @@
+feint[pot] @ drake | feint @ drake
+mass
+tri[sharp] @ ally(0) | tri @ ally(0) | feint[potent] @ drake | feint @ drake

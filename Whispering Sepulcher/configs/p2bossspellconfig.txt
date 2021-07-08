@@ -1,0 +1,2 @@
+blade @ self
+lord[epic] | temp[epic]
