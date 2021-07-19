@@ -24,7 +24,7 @@ async def main(sprinter):
         print(f"[{p.title}] Activating Hooks")
         await p.activate_hooks()
         await p.mouse_handler.activate_mouseless()
-        await p.send_key(Keycode.PAGE_DOWN, 0.1)
+
 
     combat_handlers = []
     Total_Count = 0
@@ -33,12 +33,16 @@ async def main(sprinter):
         start = time()
         combat_handlers = []
         # Entering Dungeon
+        for p in clients:
+            await p.send_key(Keycode.PAGE_DOWN, 0.1)
+            await asyncio.sleep(0.2)
+        await asyncio.sleep(0.3)
         await asyncio.gather(*[p.send_key(Keycode.X, 0.1) for p in clients])
         await asyncio.sleep(11)
         await asyncio.gather(*[p.wait_for_zone_change() for p in clients])
         await asyncio.sleep(1)
         await asyncio.gather(*[p.teleport(L_Whispering1) for p in clients]) # teleports to talk to
-        await asyncio.gather(*[p.send_key(Keycode.W, 3) for p in clients])
+        await asyncio.gather(*[p.send_key(Keycode.W, 1) for p in clients])
         await asyncio.gather(*[go_through_dialog(p) for p in clients])
 
         # Teleporting to Battle 
@@ -126,7 +130,7 @@ async def main(sprinter):
 
 
         # Health check
-        await asyncio.gather(*[p.use_potion_if_needed(health_percent=65, mana_percent=5) for p in clients])
+        await asyncio.gather(*[p.use_potion_if_needed(health_percent=65, mana_percent=10) for p in clients])
 
         # Teleporting to Battle
         await asyncio.gather(*[p.teleport(L_Whispering10) for p in clients]) # teleports to talk to
@@ -171,20 +175,19 @@ async def main(sprinter):
             await asyncio.gather(*[h.wait_for_combat() for h in combat_handlers]) # .wait_for_combat() to wait for combat to then go through the battles
             print("Combat ended")
 
-
-
-
-
-
-        # Reseting
-        await asyncio.sleep(1)
-        await asyncio.gather(*[logout_and_in(p) for p in clients])
-        
         # Healing
         await asyncio.sleep(2)
-        await asyncio.gather(*[p.use_potion_if_needed(health_percent=65, mana_percent=5) for p in clients])
+        await asyncio.gather(*[p.use_potion_if_needed(health_percent=65, mana_percent=25) for p in clients])
         await asyncio.gather(*[decide_heal(p) for p in clients])
         await asyncio.sleep(3.5)
+
+        # Reseting
+        await asyncio.sleep(3)
+        for p in clients:
+            await p.send_key(Keycode.PAGE_UP, 0.1)
+            await asyncio.sleep(0.3)
+        await asyncio.gather(*[p.wait_for_zone_change() for p in clients])
+        await asyncio.sleep(2)
 
         # Time
         Total_Count += 1
