@@ -77,9 +77,10 @@ async def auto_buy_potions(client):
         await client.mouse_handler.click_window_with_name(i)
         await asyncio.sleep(0.1)
     # Return
-    await client.send_key(Keycode.PAGE_UP, 0.1)
+    await asyncio.sleep(.4)
+    await client.mouse_handler.click_window_with_name('ResumeInstanceButton')
     await client.wait_for_zone_change()
-    await client.send_key(Keycode.PAGE_DOWN, 0.1)
+    
 
 
 async def safe_tp_to_mana(client):
@@ -154,7 +155,7 @@ async def collect_wisps(client):
     await client.send_key(Keycode.PAGE_DOWN, 0.2)
 
 async def decide_heal(client):
-    if await client.needs_potion(health_percent=65, mana_percent=5) and not await client.has_potion():
+    if await client.needs_potion(health_percent=65, mana_percent=25) and not await client.has_potion():
         print(f'[{client.title}] Needs potion, checking gold count')
         if await client.stats.current_gold() >= 25000: 
             print(f"[{client.title}] Enough gold, buying potions")
