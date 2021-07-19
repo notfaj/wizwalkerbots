@@ -150,9 +150,9 @@ async def collect_wisps(client):
         await safe_tp_to_mana(client)
         await asyncio.sleep(0.4)
     # Return
-    await client.send_key(Keycode.PAGE_UP, 0.2)
+    await client.mouse_handler.click_window_with_name('ResumeInstanceButton')
     await client.wait_for_zone_change()
-    await client.send_key(Keycode.PAGE_DOWN, 0.2)
+    
 
 async def decide_heal(client):
     if await client.needs_potion(health_percent=65, mana_percent=25) and not await client.has_potion():
