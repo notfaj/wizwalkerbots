@@ -10,6 +10,7 @@ from utils import decide_heal, logout_and_in, go_through_dialog , check_death, d
 L_Whispering1 = XYZ(x=-43.25860595703125, y=1592.595947265625, z=58.073028564453125)
 L_Whispering5 = XYZ(x=3692.925048828125, y=10892.2333984375, z=330.5667419433594)
 L_Whispering10 = XYZ(x=-5377.4970703125, y=9799.5234375, z=-220.61044311523438)
+WhisperingEnd = XYZ(16.658893585205078, y=-425.493896484375, z=24.296112060546875)
 
 async def main(sprinter):
     # Register clients
@@ -33,9 +34,6 @@ async def main(sprinter):
         start = time()
         combat_handlers = []
         # Entering Dungeon
-        for p in clients:
-            await p.send_key(Keycode.PAGE_DOWN, 0.1)
-            await asyncio.sleep(0.2)
         await asyncio.sleep(0.3)
         await asyncio.gather(*[p.send_key(Keycode.X, 0.1) for p in clients])
         await asyncio.sleep(11)
@@ -183,12 +181,12 @@ async def main(sprinter):
 
         # Reseting
         await asyncio.sleep(3)
-        for p in clients:
-            await p.send_key(Keycode.PAGE_UP, 0.1)
-            await asyncio.sleep(0.3)
+        await asyncio.gather(*[p.teleport(WhisperingEnd) for p in clients])
         await asyncio.gather(*[p.wait_for_zone_change() for p in clients])
         await asyncio.sleep(2)
+        await asyncio.gather(*[p.send_key(Keycode.S, 2) for p in clients])
 
+        
         # Time
         Total_Count += 1
         print("The Total Amount of Runs: ", Total_Count)
