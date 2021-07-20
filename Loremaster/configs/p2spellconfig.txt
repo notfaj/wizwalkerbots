@@ -1,0 +1,6 @@
+{1} stun @ self
+{2} feint @ boss
+{3} trap
+{4} glow[epic] | sirens[epic]
+glow[epic] | sirens[epic]
+

@@ -1,0 +1,6 @@
+{1} stun @ self
+{2} mass
+{3} feint[potent] @ boss
+tri[sharp] @ ally(0)
+
+
