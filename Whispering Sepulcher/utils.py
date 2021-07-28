@@ -71,11 +71,11 @@ async def auto_buy_potions(client):
     if not await client.is_in_npc_range():
         await client.teleport(-4442.06005859375, 1001.5532836914062)
     await client.send_key(Keycode.X, 0.1)
-    await asyncio.sleep(0.2)
+    await asyncio.sleep(6)
     # Buy potions
     for i in potion_ui_buy:
         await client.mouse_handler.click_window_with_name(i)
-        await asyncio.sleep(0.1)
+        await asyncio.sleep(1)
     # Return
     await asyncio.sleep(.4)
     await client.mouse_handler.click_window_with_name('ResumeInstanceButton')
